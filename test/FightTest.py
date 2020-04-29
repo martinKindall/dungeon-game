@@ -21,7 +21,10 @@ def playerCanHeal():
 	player.selfHeal()
 	assert player.hitpoints > playerHitpoints
 
-if __name__ == '__main__':
+def tests() -> None:
 	fighterDoesDamage(Goblin())
 	fighterDoesDamage(Player())
+
+if __name__ == '__main__':
+	tests()
 	print("Tests passed")
