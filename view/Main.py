@@ -1,5 +1,5 @@
 from controller.Game import Game
-from view import PlayerFactory
+from view import PlayerFactory, Utils
 from view.CombatView import CombatView
 
 
@@ -16,7 +16,7 @@ class Main:
 
 	def initCombatView(self):
 		self.game.nextMonsterSubject.subscribe(
-			lambda monster: CombatView(self.player, monster).fight()
+			lambda monster: self.clearScreenAndNextMonster(monster)
 		)
 
 	def initWinOrLoseView(self):
@@ -31,6 +31,11 @@ class Main:
 	def loseView(self) -> None:
 		print("You lose...")
 		exit()
+
+	def clearScreenAndNextMonster(self, monster) -> None:
+		Utils.clear()
+		CombatView(self.player, monster).fight()
+
 
 if __name__ == '__main__':
 	print("Welcome to Dungeon game!\n\n")

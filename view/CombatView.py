@@ -1,6 +1,7 @@
 import typing
 
 from enums.Action import Action
+from view import Utils
 
 if typing.TYPE_CHECKING:
 	from logic.fighter.Fighter import Fighter
@@ -14,13 +15,15 @@ class CombatView:
 		self.monster = monster
 
 	def fight(self) -> None:
-		print(self.monster, " has appeared!")
+		print(self.monster, " has appeared!\n")
 
 		while not self.monster.isDead() and not self.player.isDead():
 			self.fightInteraction(self.monster, self.player)
 			input("Press any key to continue...")
+			Utils.clear()
 			self.playerTurn()
 			input("Press any key to continue...")
+			Utils.clear()
 
 	def fightInteraction(self, attacker: 'Fighter', receiver: 'Fighter') -> None:
 		print(attacker, "is attacking!")
@@ -36,6 +39,7 @@ class CombatView:
 
 	def displayMenu(self) -> None:
 		action = self.enterValidAction()
+		print('\n')
 
 		if action == Action.ATTACK:
 			self.fightInteraction(self.player, self.monster)
