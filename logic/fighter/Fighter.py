@@ -1,10 +1,12 @@
 import abc
-
+import typing
 from rx.subject import Subject
 
 from logic.events.MonsterDies import MonsterDies
-from logic.weapon.Weapon import Weapon
 
+if typing.TYPE_CHECKING:
+	from logic.weapon.Weapon import Weapon
+	from logic.events.Event import Event
 
 class Fighter(metaclass=abc.ABCMeta):
 
