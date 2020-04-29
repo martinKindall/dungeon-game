@@ -1,17 +1,17 @@
-from __future__ import annotations
-
 from typing import List
-
+import typing
 from rx.subject import Subject
 
-from logic.events import Event
-from logic.fighter.Goblin import *
-from logic.fighter.Player import Player
+from logic.fighter.Goblin import Goblin
 
+if typing.TYPE_CHECKING:
+	from logic.fighter.Fighter import Fighter
+	from logic.events.Event import Event
+	from logic.fighter.Player import Player
 
 class Game:
 
-	def __init__(self, player: Player):
+	def __init__(self, player: 'Player'):
 		self.player = player
 		self.gameResult: Subject[bool] = Subject()
 		self.nextMonsterSubject: Subject['Fighter'] = Subject()

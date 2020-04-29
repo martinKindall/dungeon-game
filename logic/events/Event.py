@@ -1,6 +1,8 @@
-from __future__ import annotations
 import abc
+import typing
 
+if typing.TYPE_CHECKING:
+	from controller.Game import Game
 
 class Event(metaclass=abc.ABCMeta):
 

@@ -1,8 +1,9 @@
-from __future__ import annotations
-
-from logic.fighter.Goblin import *
+import typing
+from logic.fighter.Goblin import Goblin
 from logic.fighter.Player import Player
 
+if typing.TYPE_CHECKING:
+	from logic.fighter.Fighter import Fighter
 
 def fighterDoesDamage(fighter: 'Fighter'):
 	goblin = Goblin()
