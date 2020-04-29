@@ -20,9 +20,10 @@ class CombatView:
 			self.monsterTurn()
 			input("Press any key to continue...")
 			self.playerTurn()
+			input("Press any key to continue...")
 
 	def monsterTurn(self) -> None:
-		print(self.monster, " is attacking! You received damage.")
+		print(self.monster, "is attacking! You received damage.")
 		self.monster.attack(self.player)
 
 	def playerTurn(self) -> None:
@@ -31,7 +32,16 @@ class CombatView:
 
 	def displayMenu(self) -> None:
 		action = self.enterValidAction()
-		print("Entered action: ", action)
+
+		if action == Action.ATTACK:
+			print(self.player.name + ' attacked ' + self.monster.name)
+			self.player.attack(self.monster)
+		elif action == Action.HEAL:
+			print(self.player.name + ' self heals.')
+			self.player.selfHeal()
+		elif action == Action.QUIT:
+			print(self.player.name + ' abandons game. See you soon!')
+			exit()
 
 	def enterValidAction(self) -> Action:
 		while True:
@@ -44,4 +54,3 @@ class CombatView:
 				print("Not a valid action")
 			else:
 				return userAction
-

@@ -44,4 +44,5 @@ class Fighter(metaclass=abc.ABCMeta):
 		return self.hitpoints < 1
 
 	def __str__(self) -> str:
-		return self.name + " with a " + self.weapon.__str__()
+		return self.name + " with a " + self.weapon.__str__() + \
+			   " HP: " + str(self.hitpoints)

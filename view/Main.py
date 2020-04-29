@@ -21,8 +21,16 @@ class Main:
 
 	def initWinOrLoseView(self):
 		self.game.gameResult.subscribe(
-			lambda result: print("You win!") if result else print("You lose!")
+			lambda result: self.winView() if result else self.loseView()
 		)
+
+	def winView(self) -> None:
+		print("You win!")
+		exit()
+
+	def loseView(self) -> None:
+		print("you lose!")
+		exit()
 
 if __name__ == '__main__':
 	print("Welcome to Dungeon game!\n\n")
