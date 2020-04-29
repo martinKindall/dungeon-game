@@ -18,3 +18,17 @@ class Game:
 		self.monsters: List[Fighter] = list()
 		self.monsters.append(Goblin())
 		self.monsters.append(Goblin())
+
+	def gameOver(self) -> None:
+		self.gameResult.on_next(False)
+		self.gameResult.on_completed()
+
+	def win(self) -> None:
+		self.gameResult.on_next(True)
+		self.gameResult.on_completed()
+
+	# def getNextMonster(self) -> None:
+	# 	if len(self.monsters) == 0:
+	# 		self.win()
+	# 	else:
+	# 		nextMonster = self.monsters.pop()
