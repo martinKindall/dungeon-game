@@ -15,7 +15,7 @@ def fighterDoesDamage(fighter: 'Fighter'):
 	assert goblin.hitpoints == 0
 
 def playerCanHeal():
-	player = Player()
+	player = Player("")
 	goblin = Goblin()
 
 	goblin.attack(player)
@@ -25,7 +25,7 @@ def playerCanHeal():
 
 def tests() -> None:
 	fighterDoesDamage(Goblin())
-	fighterDoesDamage(Player())
+	fighterDoesDamage(Player(""))
 
 if __name__ == '__main__':
 	tests()

@@ -14,7 +14,7 @@ class Fighter(metaclass=abc.ABCMeta):
 			self,
 			name: str,
 			maxHitpoints: int,
-			weapon: Weapon,
+			weapon: 'Weapon',
 			exp: int):
 
 		self.name = name

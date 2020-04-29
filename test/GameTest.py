@@ -10,7 +10,7 @@ def myAssert(boolean: bool) -> None:
 	assert boolean
 
 def gameOver() -> None:
-	player = Player()
+	player = Player("")
 	game = Game(player)
 
 	game.gameResult.subscribe(
@@ -21,7 +21,7 @@ def gameOver() -> None:
 		game.currentMonster.attack(player)
 
 def gameWin() -> None:
-	player = Player()
+	player = Player("")
 	game = Game(player)
 
 	game.gameResult.subscribe(
