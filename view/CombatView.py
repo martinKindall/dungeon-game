@@ -17,14 +17,18 @@ class CombatView:
 		print(self.monster, " has appeared!")
 
 		while not self.monster.isDead() and not self.player.isDead():
-			self.monsterTurn()
+			self.fightInteraction(self.monster, self.player)
 			input("Press any key to continue...")
 			self.playerTurn()
 			input("Press any key to continue...")
 
-	def monsterTurn(self) -> None:
-		print(self.monster, "is attacking! You received damage.")
-		self.monster.attack(self.player)
+	def fightInteraction(self, attacker: 'Fighter', receiver: 'Fighter') -> None:
+		print(attacker, "is attacking!")
+		attacker.attack(receiver)
+		if receiver.dodgeState:
+			print(receiver, "dodged the attack!")
+		else:
+			print(receiver, "received damage.")
 
 	def playerTurn(self) -> None:
 		print(self.player)
@@ -34,8 +38,7 @@ class CombatView:
 		action = self.enterValidAction()
 
 		if action == Action.ATTACK:
-			print(self.player.name + ' attacked ' + self.monster.name)
-			self.player.attack(self.monster)
+			self.fightInteraction(self.player, self.monster)
 		elif action == Action.HEAL:
 			print(self.player.name + ' self heals.')
 			self.player.selfHeal()

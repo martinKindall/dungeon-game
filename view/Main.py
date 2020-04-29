@@ -29,7 +29,7 @@ class Main:
 		exit()
 
 	def loseView(self) -> None:
-		print("you lose!")
+		print("You lose...")
 		exit()
 
 if __name__ == '__main__':

@@ -1,5 +1,7 @@
 import abc
 import typing
+from random import randint
+
 from rx.subject import Subject
 
 from logic.events.MonsterDies import MonsterDies
@@ -15,7 +17,9 @@ class Fighter(metaclass=abc.ABCMeta):
 			name: str,
 			maxHitpoints: int,
 			weapon: 'Weapon',
-			exp: int):
+			exp: int,
+			dodgePoints: int,
+			dodgeState: bool = False):
 
 		self.name = name
 		self.maxHitpoints = maxHitpoints
@@ -23,15 +27,23 @@ class Fighter(metaclass=abc.ABCMeta):
 		self.weapon = weapon
 		self.exp = exp
 		self.eventObservable: Subject['Event'] = Subject()
+		self.dodgePoints = dodgePoints
+		self.dodgeState = dodgeState
 
 	def getAttackPoints(self) -> int:
 		return self.weapon.getAttackPoints()
 
 	def receiveDamage(self, fighter: 'Fighter') -> None:
-		self.hitpoints -= fighter.getAttackPoints()
-		if self.hitpoints <= 0:
-			self.hitpoints = 0
-			self.die()
+		self.dodgeState = False
+
+		diceRoll = randint(1, 10)
+		if diceRoll <= self.dodgePoints:
+			self.dodgeState = True
+		else:
+			self.hitpoints -= fighter.getAttackPoints()
+			if self.hitpoints <= 0:
+				self.hitpoints = 0
+				self.die()
 
 	def attack(self, fighter: 'Fighter') -> None:
 		fighter.receiveDamage(self)
