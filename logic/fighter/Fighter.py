@@ -39,3 +39,9 @@ class Fighter(metaclass=abc.ABCMeta):
 	def die(self) -> None:
 		self.eventObservable.on_next(MonsterDies())
 		self.eventObservable.on_completed()
+
+	def isDead(self) -> bool:
+		return self.hitpoints < 1
+
+	def __str__(self) -> str:
+		return self.name + " with a " + self.weapon.__str__()
