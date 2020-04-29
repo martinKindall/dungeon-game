@@ -9,13 +9,12 @@ class Fighter(metaclass=abc.ABCMeta):
 			self,
 			name: str,
 			maxHitpoints: int,
-			hitpoints: int,
 			weapon: Weapon,
 			exp: int):
 
 		self.name = name
 		self.maxHitpoints = maxHitpoints
-		self.hitpoints = hitpoints
+		self.hitpoints = maxHitpoints
 		self.weapon = weapon
 		self.exp = exp
 
