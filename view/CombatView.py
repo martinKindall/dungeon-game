@@ -31,6 +31,17 @@ class CombatView:
 
 	def displayMenu(self) -> None:
 		action = self.enterValidAction()
+		print("Entered action: ", action)
 
 	def enterValidAction(self) -> Action:
 		while True:
+			actionList: typing.List[Action] = [action for action in Action]
+			for action in actionList:
+				print(action, "): ", action.description())
+			try:
+				userAction = Action.strToAction(input(" -> Enter an action: "))
+			except ValueError:
+				print("Not a valid action")
+			else:
+				return userAction
+
