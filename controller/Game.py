@@ -1,10 +1,11 @@
+from __future__ import annotations
+
 from typing import List
 
 from rx.subject import Subject
 
-from logic.events.Event import Event
-from logic.fighter.Fighter import Fighter
-from logic.fighter.Goblin import Goblin
+from logic.events import Event
+from logic.fighter.Goblin import *
 from logic.fighter.Player import Player
 
 
@@ -13,10 +14,10 @@ class Game:
 	def __init__(self, player: Player):
 		self.player = player
 		self.gameResult: Subject[bool] = Subject()
-		self.nextMonsterSubject: Subject[Fighter] = Subject()
+		self.nextMonsterSubject: Subject['Fighter'] = Subject()
 
-		self.currentMonster: Fighter = Goblin()
-		self.monsters: List[Fighter] = list()
+		self.currentMonster: 'Fighter' = Goblin()
+		self.monsters: List['Fighter'] = list()
 		self.monsters.append(Goblin())
 		self.monsters.append(Goblin())
 
@@ -35,7 +36,7 @@ class Game:
 		self.gameResult.on_next(True)
 		self.gameResult.on_completed()
 
-	def accept(self, event: Event) -> None:
+	def accept(self, event: 'Event') -> None:
 		event.visitGame(self)
 
 	def release(self) -> None:

@@ -1,8 +1,7 @@
-from controller.Game import Game
 from logic.events.Event import Event
 
 
 class MonsterDies(Event):
 
-	def visitGame(self, game: Game):
-		game.goNextMonster()
+	def visitGame(self, game):
+		pass

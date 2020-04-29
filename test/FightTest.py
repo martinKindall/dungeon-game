@@ -1,9 +1,10 @@
-from logic.fighter.Fighter import Fighter
-from logic.fighter.Goblin import Goblin
+from __future__ import annotations
+
+from logic.fighter.Goblin import *
 from logic.fighter.Player import Player
 
 
-def fighterDoesDamage(fighter: Fighter):
+def fighterDoesDamage(fighter: 'Fighter'):
 	goblin = Goblin()
 
 	for _ in range(3):

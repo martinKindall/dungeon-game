@@ -2,7 +2,6 @@ import abc
 
 from rx.subject import Subject
 
-from logic.events.Event import Event
 from logic.events.MonsterDies import MonsterDies
 from logic.weapon.Weapon import Weapon
 
@@ -21,7 +20,7 @@ class Fighter(metaclass=abc.ABCMeta):
 		self.hitpoints = maxHitpoints
 		self.weapon = weapon
 		self.exp = exp
-		self.eventObservable: Subject[Event] = Subject()
+		self.eventObservable: Subject['Event'] = Subject()
 
 	def getAttackPoints(self) -> int:
 		return self.weapon.getAttackPoints()
