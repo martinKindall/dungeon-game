@@ -1,16 +1,27 @@
+from logic.fighter.Fighter import Fighter
 from logic.fighter.Goblin import Goblin
+from logic.fighter.Player import Player
 
 
-def fighterDoesDamage():
-	goblin1 = Goblin()
-	goblin2 = Goblin()
+def fighterDoesDamage(fighter: Fighter):
+	goblin = Goblin()
 
 	for _ in range(3):
-		goblin1.attack(goblin2)
+		fighter.attack(goblin)
 
-	assert goblin1.hitpoints > goblin2.hitpoints
-	assert goblin2.hitpoints == 0
+	assert fighter.hitpoints > goblin.hitpoints
+	assert goblin.hitpoints == 0
+
+def playerCanHeal():
+	player = Player()
+	goblin = Goblin()
+
+	goblin.attack(player)
+	playerHitpoints = player.hitpoints
+	player.selfHeal()
+	assert player.hitpoints > playerHitpoints
 
 if __name__ == '__main__':
-	fighterDoesDamage()
+	fighterDoesDamage(Goblin())
+	fighterDoesDamage(Player())
 	print("Tests passed")
