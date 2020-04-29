@@ -1,7 +1,11 @@
 import typing
+
+from enums.Action import Action
+
 if typing.TYPE_CHECKING:
 	from logic.fighter.Fighter import Fighter
 	from logic.fighter.Player import Player
+
 
 class CombatView:
 
@@ -26,4 +30,7 @@ class CombatView:
 		self.displayMenu()
 
 	def displayMenu(self) -> None:
-		pass
+		action = self.enterValidAction()
+
+	def enterValidAction(self) -> Action:
+		while True:
