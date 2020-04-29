@@ -51,3 +51,6 @@ class Game:
 			self.currentMonsterDisposable.dispose()
 			self.currentMonsterDisposable = nextMonster.eventObservable.subscribe(self.accept)
 			self.nextMonsterSubject.on_next(nextMonster)
+
+	def start(self) -> None:
+		self.nextMonsterSubject.on_next(self.currentMonster)
