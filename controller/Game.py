@@ -42,7 +42,7 @@ class Game:
 		self.playerDisposable.dispose()
 		self.currentMonsterDisposable.dispose()
 
-	def getNextMonster(self) -> None:
+	def goNextMonster(self) -> None:
 		if len(self.monsters) == 0:
 			self.win()
 		else:

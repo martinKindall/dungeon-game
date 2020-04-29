@@ -3,6 +3,7 @@ import abc
 from rx.subject import Subject
 
 from logic.events.Event import Event
+from logic.events.MonsterDies import MonsterDies
 from logic.weapon.Weapon import Weapon
 
 
@@ -27,8 +28,13 @@ class Fighter(metaclass=abc.ABCMeta):
 
 	def receiveDamage(self, fighter: 'Fighter') -> None:
 		self.hitpoints -= fighter.getAttackPoints()
-		if self.hitpoints < 0:
+		if self.hitpoints <= 0:
 			self.hitpoints = 0
+			self.die()
 
 	def attack(self, fighter: 'Fighter') -> None:
 		fighter.receiveDamage(self)
+
+	def die(self) -> None:
+		self.eventObservable.on_next(MonsterDies())
+		self.eventObservable.on_completed()
