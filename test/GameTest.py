@@ -34,11 +34,29 @@ def gameWin() -> None:
 
 	game.start()
 
+def gameWinNotUsingModelDirectly() -> None:
+	player = Player("", dodgePoints=0)
+	game = Game(player)
+
+	game.gameResult.subscribe(
+		lambda result: myAssert(result)
+	)
+
+	game.nextMonsterSubject.subscribe(
+		lambda monster: finishMonsterUsingGame(game)
+	)
+
+	game.start()
 
 def finishMonster(player: 'Fighter', monster: 'Fighter') -> None:
-	while monster.hitpoints > 0:
+	while not monster.isDead():
 		player.attack(monster)
+
+def finishMonsterUsingGame(game: Game) -> None:
+	while not game.currentMonsterIsDead():
+		game.playerAttackCurrentMonster()
 
 def tests() -> None:
 	gameOver()
 	gameWin()
+	gameWinNotUsingModelDirectly()

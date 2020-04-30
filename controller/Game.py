@@ -61,6 +61,9 @@ class Game:
 	def currentMonsterAttackPlayer(self) -> str:
 		return self._fightInteraction(self.currentMonster, self.player)
 
+	def currentMonsterIsDead(self) -> bool:
+		return self.currentMonster.isDead()
+
 	@classmethod
 	def _fightInteraction(cls, attacker: 'Fighter', receiver: 'Fighter') -> str:
 		attacker.attack(receiver)
