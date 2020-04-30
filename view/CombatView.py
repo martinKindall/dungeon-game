@@ -6,32 +6,27 @@ from view import Utils
 if typing.TYPE_CHECKING:
 	from logic.fighter.Fighter import Fighter
 	from logic.fighter.Player import Player
+	from controller.Game import Game
 
 
 class CombatView:
 
-	def __init__(self, player: 'Player', monster: 'Fighter'):
+	def __init__(self, game: 'Game', player: 'Player', monster: 'Fighter'):
 		self.player = player
 		self.monster = monster
+		self.game = game
 
 	def fight(self) -> None:
 		print(self.monster, " has appeared!\n")
 
-		while not self.monster.isDead() and not self.player.isDead():
-			self.fightInteraction(self.monster, self.player)
+		while not self.game.currentMonsterIsDead():
+			print('{} is attacking!'.format(self.monster))
+			print(self.game.currentMonsterAttackPlayer())
 			input("Press any key to continue...")
 			Utils.clear()
 			self.playerTurn()
 			input("Press any key to continue...")
 			Utils.clear()
-
-	def fightInteraction(self, attacker: 'Fighter', receiver: 'Fighter') -> None:
-		print(attacker, "is attacking!")
-		attacker.attack(receiver)
-		if receiver.dodgeState:
-			print(receiver, "dodged the attack!")
-		else:
-			print(receiver, "received damage.")
 
 	def playerTurn(self) -> None:
 		print(self.player)
@@ -42,7 +37,7 @@ class CombatView:
 		print('\n')
 
 		if action == Action.ATTACK:
-			self.fightInteraction(self.player, self.monster)
+			print(self.game.playerAttackCurrentMonster())
 		elif action == Action.HEAL:
 			print(self.player.name + ' self heals.')
 			self.player.selfHeal()

@@ -34,7 +34,7 @@ class Main:
 
 	def clearScreenAndNextMonster(self, monster) -> None:
 		Utils.clear()
-		CombatView(self.player, monster).fight()
+		CombatView(self.game, self.player, monster).fight()
 
 
 if __name__ == '__main__':
