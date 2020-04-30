@@ -28,7 +28,7 @@ def gameWin() -> None:
 		lambda result: myAssert(result)
 	)
 
-	game.nextMonsterSubject.subscribe(
+	game.nextMonsterNameSubject.subscribe(
 		lambda monster: finishMonster(player, monster)
 	)
 
@@ -42,7 +42,7 @@ def gameWinNotUsingModelDirectly() -> None:
 		lambda result: myAssert(result)
 	)
 
-	game.nextMonsterSubject.subscribe(
+	game.nextMonsterNameSubject.subscribe(
 		lambda monster: finishMonsterUsingGame(game)
 	)
 

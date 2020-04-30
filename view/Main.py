@@ -15,7 +15,7 @@ class Main:
 		self.game.start()
 
 	def initCombatView(self):
-		self.game.nextMonsterSubject.subscribe(
+		self.game.nextMonsterNameSubject.subscribe(
 			lambda monster: self.clearScreenAndNextMonster(monster)
 		)
 
@@ -32,11 +32,12 @@ class Main:
 		print("You lose...")
 		exit()
 
-	def clearScreenAndNextMonster(self, monster) -> None:
+	def clearScreenAndNextMonster(self, monsterName: str) -> None:
 		Utils.clear()
-		CombatView(self.game, self.player, monster).fight()
+		CombatView(self.game, self.player, monsterName).fight()
 
 
 if __name__ == '__main__':
+	Utils.clear()
 	print("Welcome to Dungeon game!\n\n")
 	Main().start()

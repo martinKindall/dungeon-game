@@ -14,7 +14,7 @@ class Game:
 	def __init__(self, player: 'Player'):
 		self.player = player
 		self.gameResult: Subject[bool] = Subject()
-		self.nextMonsterSubject: Subject['Fighter'] = Subject()
+		self.nextMonsterNameSubject: Subject[str] = Subject()
 
 		self.currentMonster: 'Fighter' = Goblin()
 		self.monsters: List['Fighter'] = list()
@@ -50,10 +50,11 @@ class Game:
 			nextMonster = self.monsters.pop()
 			self.currentMonsterDisposable.dispose()
 			self.currentMonsterDisposable = nextMonster.eventObservable.subscribe(self.accept)
-			self.nextMonsterSubject.on_next(nextMonster)
+			self.currentMonster = nextMonster
+			self.nextMonsterNameSubject.on_next(nextMonster)
 
 	def start(self) -> None:
-		self.nextMonsterSubject.on_next(self.currentMonster)
+		self.nextMonsterNameSubject.on_next(self.currentMonster)
 
 	def playerAttackCurrentMonster(self) -> str:
 		return self._fightInteraction(self.player, self.currentMonster)

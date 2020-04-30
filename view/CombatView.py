@@ -4,23 +4,22 @@ from enums.Action import Action
 from view import Utils
 
 if typing.TYPE_CHECKING:
-	from logic.fighter.Fighter import Fighter
 	from logic.fighter.Player import Player
 	from controller.Game import Game
 
 
 class CombatView:
 
-	def __init__(self, game: 'Game', player: 'Player', monster: 'Fighter'):
+	def __init__(self, game: 'Game', player: 'Player', monsterName: str):
 		self.player = player
-		self.monster = monster
+		self.monsterName = monsterName
 		self.game = game
 
 	def fight(self) -> None:
-		print(self.monster, " has appeared!\n")
+		print(self.monsterName, " has appeared!\n")
 
 		while not self.game.currentMonsterIsDead():
-			print('{} is attacking!'.format(self.monster))
+			print('{} is attacking!'.format(self.monsterName))
 			print(self.game.currentMonsterAttackPlayer())
 			input("Press any key to continue...")
 			Utils.clear()
