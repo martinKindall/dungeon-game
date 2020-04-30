@@ -6,7 +6,7 @@ if typing.TYPE_CHECKING:
 	from logic.fighter.Fighter import Fighter
 
 def fighterDoesDamage(fighter: 'Fighter'):
-	goblin = Goblin()
+	goblin = Goblin(dodgePoints=0)
 
 	for _ in range(3):
 		fighter.attack(goblin)
@@ -15,8 +15,8 @@ def fighterDoesDamage(fighter: 'Fighter'):
 	assert goblin.hitpoints == 0
 
 def playerCanHeal():
-	player = Player("")
-	goblin = Goblin()
+	player = Player("", dodgePoints=0)
+	goblin = Goblin(dodgePoints=0)
 
 	goblin.attack(player)
 	playerHitpoints = player.hitpoints
@@ -24,8 +24,8 @@ def playerCanHeal():
 	assert player.hitpoints > playerHitpoints
 
 def tests() -> None:
-	fighterDoesDamage(Goblin())
-	fighterDoesDamage(Player(""))
+	fighterDoesDamage(Goblin(dodgePoints=0))
+	fighterDoesDamage(Player("", dodgePoints=0))
 
 if __name__ == '__main__':
 	tests()
