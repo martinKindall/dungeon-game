@@ -54,3 +54,17 @@ class Game:
 
 	def start(self) -> None:
 		self.nextMonsterSubject.on_next(self.currentMonster)
+
+	def playerAttackCurrentMonster(self) -> str:
+		return self._fightInteraction(self.player, self.currentMonster)
+
+	def currentMonsterAttackPlayer(self) -> str:
+		return self._fightInteraction(self.currentMonster, self.player)
+
+	@classmethod
+	def _fightInteraction(cls, attacker: 'Fighter', receiver: 'Fighter') -> str:
+		attacker.attack(receiver)
+		if receiver.dodgeState:
+			return '{} dodged the attack!'.format(receiver.name)
+		else:
+			return '{} received damage.'.format(receiver.name)
