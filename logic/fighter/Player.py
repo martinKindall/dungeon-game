@@ -10,6 +10,8 @@ class Player(Fighter):
 
 	def selfHeal(self) -> None:
 		self.hitpoints += 3
+		if self.hitpoints > self.maxHitpoints:
+			self.hitpoints = self.maxHitpoints
 
 	def die(self) -> None:
 		self.eventObservable.on_next(PlayerDies())

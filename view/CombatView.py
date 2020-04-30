@@ -1,4 +1,5 @@
 import typing
+from typing import List
 
 from enums.Action import Action
 from view import Utils
@@ -46,7 +47,7 @@ class CombatView:
 
 	def enterValidAction(self) -> Action:
 		while True:
-			actionList: typing.List[Action] = [action for action in Action]
+			actionList: List[Action] = [action for action in Action]
 			for action in actionList:
 				print(action, "): ", action.description())
 			try:
